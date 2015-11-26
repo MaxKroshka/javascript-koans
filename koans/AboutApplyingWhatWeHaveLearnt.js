@@ -114,12 +114,12 @@ describe("About Applying What We Have Learnt", function() {
     };
 
     /* chain() together map(), flatten() and reduce() */
-    ingredientCount = {}
-    _.flatten(_.map(products, function(product) {
+    ingredientCount = _.flatten(_.map(products, function(product) {
       return product.ingredients;
-    })).forEach(function(ingredient) {
-      ingredientCount[ingredient] = (ingredientCount[ingredient] || 0) + 1;
-    });
+    })).reduce(function(object, ingredient) {
+      object[ingredient] = (object[ingredient] || 0) + 1;
+      return object;
+    }, {});
 
     expect(ingredientCount['mushrooms']).toBe(2);
   });
